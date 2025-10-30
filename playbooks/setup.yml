@@ -8,30 +8,28 @@
     is_macos: "{{ ansible_os_family == 'Darwin' }}"
   roles:
     - role: apt-update
-      when: is_linux
+      when: ansible_distribution == 'Ubuntu'
     - role: setup-snap
-      when: is_linux
+      when: ansible_distribution == 'Ubuntu'
     - role: setup-flatpak
-      when: is_linux
-    # - setup-homebrew
+      when: ansible_distribution == 'Ubuntu'
+    - setup-homebrew
     - role: rust
     - role: python3
     - role: git
-      when: is_linux
     - role: opencode
     - role: zsh
     - role: ssh
     - role: tmux
     - role: bw
-    - role: aichat
+    # - role: aichat
     - role: nvim
-    # # - ansible
+    # - ansible
     - role: kubectl
     - role: docker
-      when: is_linux
     # - dotconfig
-    - role: gui-apps
-      when: gui
+    # - role: gui-apps
+    #   when: gui
     # - role: stow
   tasks:
     - name: Print message

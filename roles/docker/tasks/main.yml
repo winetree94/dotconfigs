@@ -1,4 +1,5 @@
 - name: Docker
+  when: ansible_distribution == 'Ubuntu'
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present

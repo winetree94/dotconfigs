@@ -1,6 +1,6 @@
 - name: Install Python3 (Apt)
   become: true
-  when: ansible_os_family != 'Darwin'
+  when: ansible_distribution == 'Ubuntu'
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
@@ -8,6 +8,17 @@
     - python3
     - pipx
     - build-essential
+
+- name: Install the latest version of Apache
+  become: true
+  when: ansible_distribution == 'Fedora'
+  ansible.builtin.dnf5:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "@development-tools"
+    - pipx
+    - python3
 
 - name: Install Python3 (Brew)
   become: false

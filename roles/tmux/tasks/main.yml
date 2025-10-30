@@ -1,7 +1,14 @@
 - name: Uninstall apt tmux
-  when: ansible_os_family != 'Darwin'
+  when: ansible_os_family == 'Ubuntu'
   become: true
   ansible.builtin.apt:
+    name: tmux
+    state: present
+
+- name: Uninstall apt tmux
+  when: ansible_os_family == 'Fedora'
+  become: true
+  ansible.builtin.dnf:
     name: tmux
     state: present
 
