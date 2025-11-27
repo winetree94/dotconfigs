@@ -31,12 +31,12 @@
     name: "{{ lookup('ansible.builtin.env', 'USER') }}"
     shell: /usr/bin/zsh
 
-- name: Setup default shell (MacOS)
-  become: true
-  when: ansible_os_family == 'Darwin'
-  ansible.builtin.user:
-    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    shell: /bin/zsh
+# - name: Setup default shell (MacOS)
+#   become: true
+#   when: ansible_os_family == 'Darwin'
+#   ansible.builtin.user:
+#     name: "{{ lookup('ansible.builtin.env', 'USER') }}"
+#     shell: /bin/zsh
 
 - name: Setup config dir
   ansible.builtin.file:
