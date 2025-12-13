@@ -14,7 +14,6 @@
     mode: "0644"
   with_items:
     - k3s.yaml
-    - xeon.yaml
 
 - name: Tap a Homebrew repository, state present
   community.general.homebrew_tap:
