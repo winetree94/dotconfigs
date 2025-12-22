@@ -28,5 +28,7 @@
     "html": true,
     "scss": true,
     "astro": true,
+    "ansible": true,
+    "toml": true,
   },
 }
