@@ -12,9 +12,9 @@
     "default_profile": "ask",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
+      "model": "claude-sonnet-4.5",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "vim_mode": true,
   "ui_font_size": 16,
@@ -22,6 +22,11 @@
   "theme": {
     "mode": "system",
     "light": "Ayu Light",
-    "dark": "Ayu Dark"
-  }
+    "dark": "Ayu Dark",
+  },
+  "auto_install_extensions": {
+    "html": true,
+    "scss": true,
+    "astro": true,
+  },
 }
