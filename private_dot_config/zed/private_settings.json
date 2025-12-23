@@ -37,7 +37,6 @@
     "lua": true,
     "xml": true,
     "emmet": true,
-    "biome": true,
     "docker-compose": true,
   },
 }
