@@ -49,15 +49,16 @@
   },
   // 글로벌 허용 툴
   "tools": {
-    "tinyrack-mcp-dev": true
+    "vivident-dev-agent-mcp": true
   },
   "mcp": {
-    "tinyrack-mcp-dev": {
+    "vivident-dev-agent-mcp": {
       "type": "remote",
-      "url": "https://mcp.tinyrack.net/metamcp/personal-dev-agent/mcp",
+      "url": "https://n8n.winetree94.com/mcp/vivident-dev-agent",
       "enabled": true,
+      "oauth": false,
       "headers": {
-        "x-api-key": "{env:MCP_TINYRACK_NET_DEV_API_KEY}"
+        "Authorization": "Bearer {env:VIVIDENT_DEV_AGENT_MCP_API_KEY}"
       }
     }
   }
