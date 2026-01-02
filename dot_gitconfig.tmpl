@@ -1,11 +1,13 @@
 [user]
   name = winetree94
   email = me@winetree94.com
+{{ if ne .chezmoi.hostname "Gyudaes-Mac-Studio" }}
   signingkey = C20D90288161417E
 [commit]
   gpgsign = true
 [tag]
   gpgsign = true
+{{ end }}
 [pull]
   rebase = true
 [credential]
