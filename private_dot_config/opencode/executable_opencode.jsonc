@@ -60,6 +60,14 @@
       "headers": {
         "Authorization": "Bearer {env:VIVIDENT_DEV_AGENT_MCP_API_KEY}"
       }
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "enabled": true
     }
   }
 }
