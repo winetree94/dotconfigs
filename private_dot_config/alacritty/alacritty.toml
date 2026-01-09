@@ -1,3 +1,7 @@
 [window]
 opacity = 0.95
 blur = true
+
+[keyboard]
+bindings = [{ key = "Return", mods = "Shift", chars = "\u001b\r" }] 
+
