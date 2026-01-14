@@ -1,5 +1,7 @@
 ---
 description: Commit
+agent: build
+model: zai-coding-plan/glm-4.7
 ---
 
 Analyze current changes and create well-organized commits.
