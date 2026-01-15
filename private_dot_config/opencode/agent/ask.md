@@ -1,6 +1,6 @@
 ---
 description: Use this agent for answering questions and explaining code without making any changes
-mode: agent
+mode: all
 tools:
   write: false
   edit: false
