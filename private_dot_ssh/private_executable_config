@@ -13,6 +13,11 @@ Host proxy-server
   User winetree94
   IdentityFile ~/.ssh/winetree94_id_rsa
 
+Host desktop
+  HostName desktop.server.lan
+  User winetree94
+  IdentityFile ~/.ssh/winetree94_id_rsa
+
 Host github.com
   HostName github.com
   User git
