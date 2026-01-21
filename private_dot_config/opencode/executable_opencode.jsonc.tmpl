@@ -2,7 +2,16 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "opencode",
   // "theme": "catppuccin",
-  "provider": {},
+  "provider": {
+    "NanoGPT": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "NanoGPT",
+      "options": {
+        "apiKey": "{env:NANOGPT_API_KEY}",
+        "baseURL": "https://nano-gpt.com/api/v1"
+      }
+    }
+  },
   // "small_model": "openrouter/x-ai/grok-4-fast:free",
   // "model": "openrouter/x-ai/grok-4-fast:free",
   // "model": "anthropic/claude-sonnet-4-20250514",
@@ -10,8 +19,10 @@
   // "small_model": "zai-coding-plan/glm-4.5-air",
   // "model": "github-copilot/claude-opus-4.5",
   // "small_model": "github-copilot/claude-haiku-4.5",
-  "model": "minimax/MiniMax-M2.1",
-  "small_model": "minimax/MiniMax-M2.1",
+  // "model": "minimax/MiniMax-M2.1",
+  // "small_model": "minimax/MiniMax-M2.1",
+  "model": "nano-gpt/minimax/minimax-m2.1",
+  "small_model": "nano-gpt/minimax/minimax-m2.1",
   "permission": {
     "bash": "allow",
     "edit": "allow",
