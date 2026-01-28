@@ -11,56 +11,53 @@
   // "small_model": "github-copilot/claude-haiku-4.5",
   // "model": "minimax/MiniMax-M2.1",
   // "small_model": "minimax/MiniMax-M2.1",
-  "model": "anthropic/claude-opus-4-5",
-  "small_model": "anthropic/claude-haiku-4-5",
+  // "model": "minimax/MiniMax-M2.1",
+  // "small_model": "minimax/MiniMax-M2.1",
+  "model": "synthetic/kimi-k2.5",
+  "small_model": "synthetic/kimi-k2.5",
+  // "model": "anthropic/claude-opus-4-5",
+  // "small_model": "anthropic/claude-haiku-4-5",
   "permission": {
     "bash": "allow",
     "edit": "allow",
     "webfetch": "allow"
   },
   "provider": {
-    "NanoGPT": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "NanoGPT",
-      "options": {
-        "baseURL": "https://nano-gpt.com/api/v1",
-        "apiKey": "{env:NANOGPT_API_KEY}"
-      },
+    "synthetic": {
+      "models": {
+        // opencode zen's config for this model:
+        // curl -sf "https://models.dev/api.json" | jq '.["opencode"]["models"]["kimi-k2.5"]
+        "kimi-k2.5": {
+          "name": "Kimi K2.5",
+          "id": "hf:moonshotai/Kimi-K2.5",
+          "reasoning": true,
+          "tool_call": true,
+          "interleaved": {
+            "field": "reasoning_content"
+          },
+          // https://huggingface.co/moonshotai/Kimi-K2.5#6-model-usage
+          "options": {
+            "temperature": 1.0,
+            "top_p": 0.95
+          },
+          "temperature": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              //"video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "limit": {
+            "context": 262144,
+            "output": 262144
+          }
+        }
+      }
     }
-  },
-  "agent": {
-    // "build": {
-    //   "mode": "primary",
-    //   "model": "openrouter/x-ai/grok-4-fast:free",
-    //   "prompt": "{file:./prompts/build.md}",
-    //   "tools": {
-    //     "write": true,
-    //     "edit": true,
-    //     "bash": true,
-    //     "read": true,
-    //     "grep": true,
-    //     "glob": true
-    //   }
-    // },
-    // "ask": {
-    //   "mode": "subagent",
-    //   "model": "openrouter/x-ai/grok-4-fast:free",
-    //   "prompt": "{file:./prompts/ask.md}",
-    //   "tools": {
-    //     "write": false,
-    // <LeftMouse>   "edit": false,
-    //     "bash": false
-    //   }
-    // },
-    // "plan": {
-    //   "mode": "primary",
-    //   "model": "openrouter/x-ai/grok-4-fast:free",
-    //   "tools": {
-    //     "write": false,
-    //     "edit": false,
-    //     "bash": false
-    //   }
-    // }
   },
   "mcp": {
     "github": {
@@ -112,5 +109,8 @@
       ],
       "enabled": true
     }
-  }
+  },
+  "plugin": [
+    "opencode-anthropic-auth@latest"
+  ]
 }
