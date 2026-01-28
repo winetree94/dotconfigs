@@ -6,7 +6,11 @@ blur = true
 hide_when_typing = false
 
 [font]
+{{ if eq .chezmoi.os "darwin" }}
 size = 14
+{{ else }}
+size = 11
+{{ end }}
 
 [keyboard]
 bindings = [
