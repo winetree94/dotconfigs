@@ -35,7 +35,7 @@
     "zai-coding-plan": {
       "models": {},
       "options": {
-        "apiKey": "{env:Z_AI_API_KEY}"
+        "apiKey": "{env:ZAI_API_KEY}"
       }
     },
     "nanogpt": {
@@ -100,14 +100,14 @@
       "type": "remote",
       "url": "https://api.z.ai/api/mcp/web_reader/mcp",
       "headers": {
-        "Authorization": "Bearer {env:Z_AI_API_KEY}"
+        "Authorization": "Bearer {env:ZAI_API_KEY}"
       }
     },
     "web-search-prime": {
       "type": "remote",
       "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
       "headers": {
-        "Authorization": "Bearer {env:Z_AI_API_KEY}"
+        "Authorization": "Bearer {env:ZAI_API_KEY}"
       }
     },
     "context7": {
