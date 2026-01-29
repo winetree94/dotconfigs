@@ -44,6 +44,43 @@
         "apiKey": "{env:Z_AI_API_KEY}"
       }
     },
+    "nanogpt": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "NanoGPT",
+      "options": {
+        "apiKey": "{env:NANOGPT_API_KEY}",
+        "baseURL": "https://nano-gpt.com/api/v1",
+        "headers": {
+          "Authorization": "Bearer {env:NANOGPT_API_KEY}"
+        }
+      },
+      "models": {
+        "zai-org/glm-4.7-flash-original": {
+          "name": "GLM 4.7 Flash Original",
+          "limit": { "context": 200000, "output": 128000 }
+        },
+        "zai-org/glm-4.7-flash-original:thinking": {
+          "name": "GLM 4.7 Flash Original Thinking",
+          "limit": { "context": 200000, "output": 128000 }
+        },
+        "zai-org/glm-4.7-original": {
+          "name": "GLM 4.7 Original",
+          "limit": { "context": 200000, "output": 65535 }
+        },
+        "zai-org/glm-4.7-original:thinking": {
+          "name": "GLM 4.7 Original Thinking",
+          "limit": { "context": 200000, "output": 65535 }
+        },
+        "moonshotai/kimi-k2.5": {
+          "name": "Kimi K2.5",
+          "limit": { "context": 256000, "output": 65535 }
+        },
+        "moonshotai/kimi-k2.5:thinking": {
+          "name": "Kimi K2.5 Thinking",
+          "limit": { "context": 256000, "output": 65535 }
+        }
+      }
+    },
     "lmstudio": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "LM Studio (local)",
