@@ -43,6 +43,18 @@
       "options": {
         "apiKey": "{env:Z_AI_API_KEY}"
       }
+    },
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1"
+      },
+      "models": {
+        "google/gemma-3-4b": {
+          "name": "Gemma 3 4b (local)"
+        }
+      }
     }
   },
   "mcp": {
