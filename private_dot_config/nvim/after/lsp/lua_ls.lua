@@ -1,0 +1,26 @@
+return {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = { 'vim', 'MiniDeps' },
+      },
+      workspace = {
+        -- library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
+        library = {
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          -- [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}

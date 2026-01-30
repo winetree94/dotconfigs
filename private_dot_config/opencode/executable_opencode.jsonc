@@ -4,8 +4,8 @@
   "instructions": [
     "~/.config/opencode/general.md"
   ],
-  "model": "synthetic/hf:moonshotai/Kimi-K2.5",
-  "small_model": "synthetic/hf:zai-org/GLM-4.7",
+  "model": "anthropic/claude-opus-4-5",
+  "small_model": "anthropic/claude-opus-4-5",
   "permission": {
     "bash": "allow",
     "edit": "allow",

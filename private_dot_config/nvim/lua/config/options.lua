@@ -42,5 +42,18 @@ opt.timeoutlen = 300
 opt.clipboard = "unnamedplus"
 
 -- Leader key configuration
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- Keymaps (preserve defaults, only add Leader based)
+vim.keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { desc = 'Save' })
+vim.keymap.set('n', '<Leader>q', '<Cmd>q<CR>', { desc = 'Quit' })
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '<Leader>dd', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+
+-- Clear search highlight with Escape
+vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>')
+
