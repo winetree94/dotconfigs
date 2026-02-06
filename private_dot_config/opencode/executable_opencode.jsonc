@@ -4,8 +4,8 @@
   "instructions": [
     "~/.config/opencode/general.md"
   ],
-  "model": "anthropic/claude-opus-4-5",
-  "small_model": "anthropic/claude-opus-4-5",
+  "model": "anthropic/claude-opus-4-6",
+  "small_model": "anthropic/claude-opus-4-6",
   "permission": {
     "bash": "allow",
     "edit": "allow",
