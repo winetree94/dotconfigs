@@ -26,6 +26,7 @@ require('mason-tool-installer').setup {
     'eslint-lsp',
     'biome',
     'css-lsp',
+    'emmet-language-server',
     'tailwindcss-language-server',
     'astro-language-server',
     'ansible-language-server',

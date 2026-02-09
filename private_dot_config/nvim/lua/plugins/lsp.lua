@@ -15,6 +15,7 @@ vim.lsp.enable({
   'vimls',
   'jsonls',
   'html',
+  'emmet_language_server',
   'cssls',
   'ansiblels',
   'dockerls',

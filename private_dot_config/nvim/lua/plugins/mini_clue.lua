@@ -44,6 +44,7 @@ MiniDeps.later(function()
       -- Leader group descriptions
       { mode = 'n', keys = '<Leader>f', desc = '+find' },
       { mode = 'n', keys = '<Leader>g', desc = '+git' },
+      { mode = 'n', keys = '<Leader>h', desc = '+gitsign' },
     },
 
     window = {

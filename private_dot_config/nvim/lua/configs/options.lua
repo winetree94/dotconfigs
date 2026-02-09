@@ -48,8 +48,14 @@ vim.g.maplocalleader = " "
 -- Clear search highlight with Escape
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
 
+vim.o.autoread = true
+
 -- LSP
 vim.keymap.set("n", "grf", function()
 	vim.lsp.buf.format({ async = true })
 end, { desc = "Format buffer (LSP)" })
+
+vim.keymap.set("n", "grd", function()
+	vim.diagnostic.setloclist()
+end, { desc = "Show diagnostics" })
 
