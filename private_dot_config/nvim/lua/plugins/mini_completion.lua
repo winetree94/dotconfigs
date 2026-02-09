@@ -1,3 +1,6 @@
-MiniDeps.add('nvim-mini/mini.completion')
+MiniDeps.add({
+	source = "nvim-mini/mini.completion",
+	checkout = "stable",
+})
 
-require('mini.completion').setup()
+require("mini.completion").setup({})
