@@ -5,4 +5,4 @@ vim.g.netrw_browse_split = 0 -- Open files in the same window
 vim.g.netrw_winsize = 25 -- Sidebar width (25% of screen)
 
 -- Toggle netrw sidebar (similar to neo-tree toggle)
-vim.keymap.set('n', '<Leader>e', '<Cmd>Lexplore<CR>', { desc = 'File explorer (netrw)' })
+vim.keymap.set('n', '<Leader>m', '<Cmd>Lexplore<CR>', { desc = 'File explorer (netrw)' })

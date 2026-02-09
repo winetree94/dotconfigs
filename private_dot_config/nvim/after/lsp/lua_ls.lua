@@ -1,26 +1,33 @@
--- return {
---   settings = {
---     Lua = {
---       runtime = {
---         version = 'LuaJIT',
---       },
---       diagnostics = {
---         globals = { 'vim', 'MiniDeps' },
---       },
---       workspace = {
---         -- library = vim.api.nvim_get_runtime_file('', true),
---         checkThirdParty = false,
---         library = {
---           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
---           [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
---           -- [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
---         },
---         maxPreload = 100000,
---         preloadFileSize = 10000,
---       },
---       telemetry = {
---         enable = false,
---       },
---     },
---   },
--- }
+---@type vim.lsp.Config
+return {
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    root_markers = {
+        '.luarc.json',
+        '.luarc.jsonc',
+        '.luacheckrc',
+        '.stylua.toml',
+        'stylua.toml',
+        'selene.toml',
+        'selene.yml',
+        '.git',
+    },
+    settings = {
+        Lua = {
+            runtime = {
+                version = "Lua 5.4",
+            },
+            completion = {
+                enable = true,
+            },
+            diagnostics = {
+                enable = true,
+                globals = { "vim" },
+            },
+            workspace = {
+                library = { vim.env.VIMRUNTIME },
+                checkThirdParty = false,
+            },
+        },
+    },
+}

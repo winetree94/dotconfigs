@@ -13,16 +13,25 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Done!" | redraw')
 end
 
-require('mini.deps').setup({ path = { package = path_package } })
+require('mini.deps').setup({
+  path = { package = path_package }
+})
 
 -- Load base options and keymaps
-require('config.options')
+-- require('config.options')
 
--- Load all plugins from lua/plugins/
-local plugins_path = vim.fn.stdpath('config') .. '/lua/plugins'
-for _, file in ipairs(vim.fn.readdir(plugins_path)) do
-  if file:match('%.lua$') then
-    local module_name = 'plugins.' .. file:gsub('%.lua$', '')
-    require(module_name)
+-- Require all .lua files in a directory under lua/
+local function load_directory(path)
+  local dir = vim.fn.stdpath('config') .. '/lua/' .. path
+  local module_prefix = path:gsub('/', '.')
+  for _, file in ipairs(vim.fn.readdir(dir)) do
+    if file:match('%.lua$') then
+      require(module_prefix .. '.' .. file:gsub('%.lua$', ''))
+    end
   end
 end
+
+-- Load all plugins
+load_directory('configs')
+load_directory('plugins')
+

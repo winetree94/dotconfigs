@@ -42,9 +42,14 @@ opt.timeoutlen = 300
 opt.clipboard = "unnamedplus"
 
 -- Leader key configuration
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Clear search highlight with Escape
-vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
+
+-- LSP
+vim.keymap.set("n", "grf", function()
+	vim.lsp.buf.format({ async = true })
+end, { desc = "Format buffer (LSP)" })
 

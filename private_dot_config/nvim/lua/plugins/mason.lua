@@ -13,12 +13,25 @@ require('mason-tool-installer').setup {
   -- a list of all tools you want to ensure are installed upon
   -- start
   ensure_installed = {
+    -- lsp
     'lua-language-server',
-    'vim-language-server',
     'stylua',
     'luacheck',
+    'yaml-language-server',
+    'vim-language-server',
+    'json-lsp',
+    'html-lsp',
     'typescript-language-server',
-    'biome'
+    'bash-language-server',
+    'eslint-lsp',
+    'biome',
+    'css-lsp',
+    'tailwindcss-language-server',
+    'astro-language-server',
+    'ansible-language-server',
+    'dockerfile-language-server',
+    'docker-language-server',
+    'docker-compose-language-service'
   },
 
   -- if set to true this will check each tool for updates. If updates
