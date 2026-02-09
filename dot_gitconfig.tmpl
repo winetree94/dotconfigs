@@ -10,7 +10,13 @@
 {{ end }}
 [pull]
   rebase = true
+
+{{ if eq .chezmoi.os "darwin" }}
+
+{{ else }}
 [credential]
   helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+{{ end }}
+
 [push]
 	autoSetupRemote = true
