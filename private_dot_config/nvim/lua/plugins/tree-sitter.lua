@@ -4,6 +4,12 @@ MiniDeps.now(function()
 		checkout = "main",
 	})
 
+  -- for mdx support
+	MiniDeps.add({
+		source = "davidmh/mdx.nvim",
+		checkout = "main",
+	})
+
 	-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
 	require("nvim-treesitter").install({
 		"lua",
@@ -12,6 +18,8 @@ MiniDeps.now(function()
 		"jsx",
 		"typescript",
 		"tsx",
+		"markdown",
+		"markdown_inline",
 	})
 
 	vim.api.nvim_create_autocmd("FileType", {
