@@ -12,6 +12,12 @@ now(function()
 	add({ source = "nvim-mini/mini.cmdline", checkout = "stable" })
 	require("mini.cmdline").setup()
 
+	add({ source = "nvim-mini/mini.jump", checkout = "stable" })
+	require("mini.jump").setup()
+
+	add({ source = "nvim-mini/mini.jump2d", checkout = "stable" })
+	require("mini.jump2d").setup()
+
   --------------- appearance
 	add({ source = "nvim-mini/mini.icons", checkout = "stable" })
 	require("mini.icons").setup()
