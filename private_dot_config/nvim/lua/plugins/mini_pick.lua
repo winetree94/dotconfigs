@@ -3,9 +3,6 @@ MiniDeps.later(function()
   MiniDeps.add({ source = 'nvim-mini/mini.pick', checkout = 'stable' })
   require('mini.pick').setup()
 
-  MiniDeps.add({ source = 'nvim-mini/mini.extra', checkout = 'stable' })
-  require('mini.extra').setup()
-
   -- Leader based keymaps
   vim.keymap.set('n', '<Leader>pf', MiniPick.builtin.files, { desc = 'Find files' })
   vim.keymap.set('n', '<Leader>pg', MiniPick.builtin.grep_live, { desc = 'Live grep' })

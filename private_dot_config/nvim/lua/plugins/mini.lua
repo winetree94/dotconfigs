@@ -2,8 +2,14 @@ local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
   --------------- text editing
+	add({ source = "nvim-mini/mini.ai", checkout = "stable" })
+	require("mini.ai").setup()
+
 	add({ source = "nvim-mini/mini.pairs", checkout = "stable" })
 	require("mini.pairs").setup()
+
+	add({ source = "nvim-mini/mini.move", checkout = "stable" })
+	require("mini.move").setup()
 
   --------------- general workflow
 	add({ source = "nvim-mini/mini.basics", checkout = "stable" })
@@ -12,8 +18,17 @@ now(function()
 	add({ source = "nvim-mini/mini.bracketed", checkout = "stable" })
 	require("mini.bracketed").setup()
 
+	add({ source = "nvim-mini/mini.bufremove", checkout = "stable" })
+	require("mini.bufremove").setup()
+
 	add({ source = "nvim-mini/mini.cmdline", checkout = "stable" })
 	require("mini.cmdline").setup()
+
+  add({ source = 'nvim-mini/mini.extra', checkout = 'stable' })
+  require('mini.extra').setup()
+
+	add({ source = "nvim-mini/mini-git", checkout = "stable" })
+	require("mini.git").setup()
 
 	add({ source = "nvim-mini/mini.jump", checkout = "stable" })
 	require("mini.jump").setup()
