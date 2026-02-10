@@ -1,6 +1,6 @@
 -- Clue (key hints)
 MiniDeps.later(function()
-  MiniDeps.add('nvim-mini/mini.clue')
+  MiniDeps.add({ source = 'nvim-mini/mini.clue', checkout = 'stable' })
 
   local miniclue = require('mini.clue')
   miniclue.setup({

@@ -1,6 +1,6 @@
 -- File explorer
 MiniDeps.later(function()
-  MiniDeps.add('nvim-mini/mini.files')
+  MiniDeps.add({ source = 'nvim-mini/mini.files', checkout = 'stable' })
   require('mini.files').setup({
     windows = {
       preview = true,

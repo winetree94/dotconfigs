@@ -3,34 +3,34 @@ local add, now = MiniDeps.add, MiniDeps.now
 -- Immediate load (UI related)
 now(function()
 	-- basic
-	add("nvim-mini/mini.basics")
+	add({ source = "nvim-mini/mini.basics", checkout = "stable" })
 	require("mini.basics").setup()
 
 	-- cmdline
-	add("nvim-mini/mini.cmdline")
+	add({ source = "nvim-mini/mini.cmdline", checkout = "stable" })
 	require("mini.cmdline").setup()
 
 	-- starter
-	add("nvim-mini/mini.starter")
+	add({ source = "nvim-mini/mini.starter", checkout = "stable" })
 	require("mini.starter").setup()
 
 	-- Icons
-	add("nvim-mini/mini.icons")
+	add({ source = "nvim-mini/mini.icons", checkout = "stable" })
 	require("mini.icons").setup()
 	MiniIcons.mock_nvim_web_devicons()
 
 	-- Statusline
-	add("nvim-mini/mini.statusline")
+	add({ source = "nvim-mini/mini.statusline", checkout = "stable" })
 	require("mini.statusline").setup({
 		use_icons = true,
 	})
 
 	-- Tabline
-	add("nvim-mini/mini.tabline")
+	add({ source = "nvim-mini/mini.tabline", checkout = "stable" })
 	require("mini.tabline").setup()
 
 	-- Notifications
-	add("nvim-mini/mini.notify")
+	add({ source = "nvim-mini/mini.notify", checkout = "stable" })
 	require("mini.notify").setup()
 	vim.notify = require("mini.notify").make_notify()
 end)

@@ -1,9 +1,9 @@
 -- Fuzzy Finder
 MiniDeps.later(function()
-  MiniDeps.add('nvim-mini/mini.pick')
+  MiniDeps.add({ source = 'nvim-mini/mini.pick', checkout = 'stable' })
   require('mini.pick').setup()
 
-  MiniDeps.add('nvim-mini/mini.extra')
+  MiniDeps.add({ source = 'nvim-mini/mini.extra', checkout = 'stable' })
   require('mini.extra').setup()
 
   -- Leader based keymaps
