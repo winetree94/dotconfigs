@@ -1,36 +1,36 @@
 local add, now = MiniDeps.add, MiniDeps.now
 
--- Immediate load (UI related)
 now(function()
-	-- basic
+  --------------- text editing
+	add({ source = "nvim-mini/mini.pairs", checkout = "stable" })
+	require("mini.pairs").setup()
+
+  --------------- general workflow
 	add({ source = "nvim-mini/mini.basics", checkout = "stable" })
 	require("mini.basics").setup()
 
-	-- cmdline
 	add({ source = "nvim-mini/mini.cmdline", checkout = "stable" })
 	require("mini.cmdline").setup()
 
-	-- starter
+  --------------- appearance
+	add({ source = "nvim-mini/mini.icons", checkout = "stable" })
+	require("mini.icons").setup()
+
+	add({ source = "nvim-mini/mini.indentscope", checkout = "stable" })
+	require("mini.indentscope").setup()
+
+	add({ source = "nvim-mini/mini.notify", checkout = "stable" })
+	require("mini.notify").setup()
+
 	add({ source = "nvim-mini/mini.starter", checkout = "stable" })
 	require("mini.starter").setup()
 
-	-- Icons
-	add({ source = "nvim-mini/mini.icons", checkout = "stable" })
-	require("mini.icons").setup()
-	MiniIcons.mock_nvim_web_devicons()
-
-	-- Statusline
 	add({ source = "nvim-mini/mini.statusline", checkout = "stable" })
-	require("mini.statusline").setup({
-		use_icons = true,
-	})
+	require("mini.statusline").setup()
 
-	-- Tabline
 	add({ source = "nvim-mini/mini.tabline", checkout = "stable" })
 	require("mini.tabline").setup()
 
-	-- Notifications
-	add({ source = "nvim-mini/mini.notify", checkout = "stable" })
-	require("mini.notify").setup()
-	vim.notify = require("mini.notify").make_notify()
+	add({ source = "nvim-mini/mini.trailspace", checkout = "stable" })
+	require("mini.trailspace").setup()
 end)
