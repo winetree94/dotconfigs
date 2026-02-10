@@ -45,6 +45,8 @@ MiniDeps.later(function()
       { mode = 'n', keys = '<Leader>p', desc = '+Mini.Pick' },
       { mode = 'n', keys = '<Leader>f', desc = '+Mini.Files' },
       { mode = 'n', keys = '<Leader>m', desc = '+Mini.Map' },
+      { mode = 'n', keys = '<Leader>g', desc = '+Git' },
+      { mode = 'n', keys = '<Leader>gt', desc = '+Toggle' },
     },
 
     window = {

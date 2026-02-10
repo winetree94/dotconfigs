@@ -17,5 +17,5 @@ MiniDeps.later(function()
 		},
 	})
 
-	vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit UI" })
+	vim.keymap.set("n", "<leader>gg", neogit.open, { desc = "Open Neogit UI" })
 end)
