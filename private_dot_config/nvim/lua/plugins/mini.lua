@@ -9,6 +9,9 @@ now(function()
 	add({ source = "nvim-mini/mini.basics", checkout = "stable" })
 	require("mini.basics").setup()
 
+	add({ source = "nvim-mini/mini.bracketed", checkout = "stable" })
+	require("mini.bracketed").setup()
+
 	add({ source = "nvim-mini/mini.cmdline", checkout = "stable" })
 	require("mini.cmdline").setup()
 
