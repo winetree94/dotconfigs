@@ -18,7 +18,6 @@
     "lsp": "allow"
   },
   "disabled_providers": [
-    "openai",
     "minimax-cn",
     "minimax",
     "minimax-cn-coding-plan",
@@ -129,6 +128,7 @@
     }
   },
   "plugin": [
-    "opencode-anthropic-auth@latest"
+    "opencode-anthropic-auth@latest",
+    "opencode-openai-codex-auth@latest"
   ]
 }
