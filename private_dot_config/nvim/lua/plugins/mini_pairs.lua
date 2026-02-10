@@ -1,5 +1,7 @@
-MiniDeps.add({
-	source = "nvim-mini/mini.pairs",
-})
+MiniDeps.later(function()
+	MiniDeps.add({
+		source = "nvim-mini/mini.pairs",
+	})
 
-require('mini.pairs').setup()
+	require("mini.pairs").setup()
+end)

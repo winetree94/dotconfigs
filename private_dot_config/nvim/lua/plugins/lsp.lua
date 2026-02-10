@@ -1,24 +1,26 @@
-MiniDeps.add({
-	source = "https://github.com/neovim/nvim-lspconfig",
-})
+MiniDeps.later(function()
+	MiniDeps.add({
+		source = "https://github.com/neovim/nvim-lspconfig",
+	})
 
-vim.lsp.enable({
-	"lua_ls",
-	"stylua",
-	"ts_ls",
-	"biome",
-	"eslint",
-	"bashls",
-	"tailwindcss",
-	"astro",
-	"yamlls",
-	"vimls",
-	"jsonls",
-	"html",
-	"emmet_language_server",
-	"cssls",
-	"ansiblels",
-	"dockerls",
-	"docker_language_server",
-	"docker_compose_language_service",
-})
+	vim.lsp.enable({
+		"lua_ls",
+		"stylua",
+		"ts_ls",
+		"biome",
+		"eslint",
+		"bashls",
+		"tailwindcss",
+		"astro",
+		"yamlls",
+		"vimls",
+		"jsonls",
+		"html",
+		"emmet_language_server",
+		"cssls",
+		"ansiblels",
+		"dockerls",
+		"docker_language_server",
+		"docker_compose_language_service",
+	})
+end)
