@@ -42,9 +42,9 @@ MiniDeps.later(function()
       miniclue.gen_clues.z(),
 
       -- Leader group descriptions
-      { mode = 'n', keys = '<Leader>f', desc = '+find' },
-      { mode = 'n', keys = '<Leader>g', desc = '+git' },
-      { mode = 'n', keys = '<Leader>h', desc = '+gitsign' },
+      { mode = 'n', keys = '<Leader>p', desc = '+Mini.Pick' },
+      { mode = 'n', keys = '<Leader>f', desc = '+Mini.Files' },
+      { mode = 'n', keys = '<Leader>m', desc = '+Mini.Map' },
     },
 
     window = {

@@ -7,8 +7,10 @@ MiniDeps.later(function()
       width_preview = 40,
     },
   })
-  -- Open file explorer with Leader-m (mini.files)
-  vim.keymap.set('n', '<Leader>e', function()
+  vim.keymap.set('n', '<Leader>fr', function()
+    MiniFiles.open()
+  end, { desc = 'File explorer (Root)' })
+  vim.keymap.set('n', '<Leader>fc', function()
     MiniFiles.open(vim.api.nvim_buf_get_name(0))
-  end, { desc = 'File explorer (mini.files)' })
+  end, { desc = 'File explorer (Current)' })
 end)

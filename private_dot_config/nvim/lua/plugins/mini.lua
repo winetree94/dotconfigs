@@ -10,6 +10,10 @@ now(function()
 	add("nvim-mini/mini.cmdline")
 	require("mini.cmdline").setup()
 
+	-- starter
+	add("nvim-mini/mini.starter")
+	require("mini.starter").setup()
+
 	-- Icons
 	add("nvim-mini/mini.icons")
 	require("mini.icons").setup()
