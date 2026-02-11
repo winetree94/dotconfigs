@@ -46,9 +46,6 @@ now(function()
 	add({ source = "nvim-mini/mini.notify", checkout = "stable" })
 	require("mini.notify").setup()
 
-	-- add({ source = "nvim-mini/mini.starter", checkout = "stable" })
-	-- require("mini.starter").setup()
-
 	add({ source = "nvim-mini/mini.statusline", checkout = "stable" })
 	require("mini.statusline").setup()
 

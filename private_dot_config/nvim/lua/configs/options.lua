@@ -15,6 +15,7 @@ opt.hlsearch = true
 opt.incsearch = true
 
 -- UI
+opt.shortmess:append("I")
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
