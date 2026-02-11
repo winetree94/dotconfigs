@@ -10,9 +10,8 @@ MiniDeps.now(function()
   })
 
   require("neo-tree").setup({})
-
   vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
-  vim.keymap.set("n", "<leader>nr", ":Neotree reveal<CR>", { desc = "Reveal current file" })
+  vim.keymap.set("n", "<leader>nr", ":Neotree toggle reveal<CR>", { desc = "Toggle Neo-tree (Reveal)" })
   vim.keymap.set("n", "<leader>nb", ":Neotree toggle show buffers right<CR>", { desc = "Toggle buffers panel" })
-  vim.keymap.set("n", "<leader>ns", ":Neotree float git_status<CR>", { desc = "Float git status" })
+  -- vim.keymap.set("n", "<leader>ns", ":Neotree float git_status<CR>", { desc = "Float git status" })
 end)
