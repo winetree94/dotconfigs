@@ -2,74 +2,70 @@
 
 ## Project Overview
 
-This is a personal Neovim configuration written entirely in Lua, targeting Neovim 0.11+.
-It uses **mini.deps** (from `echasnovski/mini.nvim`) as the plugin manager and heavily
-leverages the mini.nvim ecosystem for UI, editing, and navigation.
+Personal Neovim configuration in Lua targeting Neovim 0.11+. Uses **mini.deps**
+(`echasnovski/mini.nvim`) as plugin manager, with the mini.nvim ecosystem for editing,
+navigation, and UI. Completion is handled by **blink.cmp**, git by **gitsigns.nvim** +
+**neogit**, and file browsing by **oil.nvim** + **mini.files**.
 
 ## Directory Structure
 
 ```
-init.lua                    # Entry point: bootstraps mini.deps, loads config + plugins
+init.lua                    # Entry point: bootstraps mini.deps, loads configs/ + plugins/
 lua/
-  config/
-    options.lua             # Base Neovim options (tabs, search, UI) and keymaps
+  configs/
+    options.lua             # Neovim options, leader key, global keymaps
   plugins/
-    completion.lua          # mini.completion setup
-    git.lua                 # mini.diff (git diff signs)
-    lsp.lua                 # nvim-lspconfig + vim.lsp.enable()
-    mason.lua               # mason.nvim + mason-tool-installer
-    mini.lua                # mini.icons, statusline, tabline, notify, files, pick, extra, clue
-    neovim.lua              # lazydev.nvim (Neovim Lua dev assistance)
-    netrw.lua               # Built-in netrw file explorer config
-    theme.lua               # tokyonight.nvim colorscheme
+    blink.lua               # blink.cmp (completion engine)
+    comments.lua            # ts-comments.nvim (context-aware commenting)
+    gitsign.lua             # gitsigns.nvim (git signs, hunk actions, blame)
+    kubernetes.lua          # yaml-schema-detect.nvim (Kubernetes YAML)
+    lsp.lua                 # nvim-lspconfig + vim.lsp.enable() for all servers
+    mason.lua               # mason.nvim + mason-tool-installer (auto-install)
+    mini.lua                # Bulk mini.nvim modules (ai, pairs, move, icons, etc.)
+    mini_clue.lua           # mini.clue (keybinding hints)
+    mini_files.lua          # mini.files (file explorer)
+    mini_map.lua            # mini.map (code minimap)
+    mini_pick.lua           # mini.pick + mini.extra (fuzzy finder)
+    neogit.lua              # neogit (git porcelain UI)
+    netrw.lua               # Built-in netrw config (mostly disabled)
+    oil.lua                 # oil.nvim (file manager as buffer)
+    theme.lua               # nightfox.nvim (carbonfox colorscheme)
+    tree-sitter.lua         # nvim-treesitter (syntax highlighting)
 after/
   lsp/
-    lua_ls.lua              # Per-server LSP config overrides (Neovim 0.11+ convention)
+    lua_ls.lua              # Per-server LSP config (Neovim 0.11+ convention)
 ```
 
 ## Build / Lint / Test Commands
 
-This is a Neovim config, not a traditional project. There is no Makefile, test suite, or
-build system. Validation is done by loading Neovim and checking for errors.
-
-### Validate config loads without errors
+No traditional build system or test suite. Validation is interactive.
 
 ```bash
+# Validate config loads without errors
 nvim --headless -c 'qall'
-```
 
-### Format Lua files with StyLua
-
-```bash
-# Note: config file is named .stylelua.toml (non-standard), must be specified explicitly
+# Format ALL Lua files (config uses non-standard filename)
 stylua --config-path .stylelua.toml .
+
 # Format a single file
-stylua --config-path .stylelua.toml lua/plugins/mini.lua
-```
+stylua --config-path .stylelua.toml lua/plugins/lsp.lua
 
-### Lint Lua files with luacheck
-
-```bash
+# Lint all Lua files
 luacheck lua/ init.lua
-# Single file
-luacheck lua/plugins/lsp.lua
+
+# Lint a single file
+luacheck lua/plugins/blink.lua
 ```
 
-### Check LSP diagnostics
+**IMPORTANT:** StyLua config is `.stylelua.toml` (non-standard name). You MUST pass
+`--config-path .stylelua.toml` every time. StyLua will NOT auto-discover it.
 
-```bash
-nvim --headless -c 'lua vim.lsp.enable("lua_ls")' -c 'sleep 3' -c 'lua vim.diagnostic.get()' -c 'qall'
-```
-
-### Install tools via Mason (from within Neovim)
-
-```vim
-:MasonToolsInstall
-:MasonToolsUpdate
-```
-
-Managed tools: `lua-language-server`, `vim-language-server`, `stylua`, `luacheck`,
-`typescript-language-server`, `biome`.
+Mason-managed tools (auto-installed on startup): `lua-language-server`, `stylua`,
+`luacheck`, `yaml-language-server`, `vim-language-server`, `json-lsp`, `html-lsp`,
+`typescript-language-server`, `bash-language-server`, `eslint-lsp`, `biome`, `css-lsp`,
+`emmet-language-server`, `tailwindcss-language-server`, `astro-language-server`,
+`ansible-language-server`, `dockerfile-language-server`, `docker-language-server`,
+`docker-compose-language-service`, `gh-actions-language-server`, `helm-ls`.
 
 ## Code Style Guidelines
 
@@ -80,116 +76,106 @@ Managed tools: `lua-language-server`, `vim-language-server`, `stylua`, `luacheck
 
 ### Formatting
 
-- **Indentation:** 2 spaces (no tabs)
-- **Formatter:** StyLua (config in `.stylelua.toml`)
-- **Line width:** Default (120, StyLua default since no `column_width` is specified)
+- **Indentation:** 2 spaces (tabs for continuation in some files -- StyLua decides)
+- **Formatter:** StyLua (config: `.stylelua.toml`, indent_width=2, indent_type=Spaces)
+- **Line width:** 120 (StyLua default)
+- Always run `stylua --config-path .stylelua.toml` after editing Lua files
 
 ### Strings and Quotes
 
-- **Use single quotes** (`'`) for all Lua strings consistently
-- Double quotes are only used for Neovim option values set via `opt` (e.g., `opt.signcolumn = "yes"`)
-  and for `source` fields in `MiniDeps.add()` when the value contains a URL or slash
+- **Mixed convention observed in codebase:** some files use single quotes (`'`), others
+  use double quotes (`"`). StyLua does not enforce quote style. Match the existing style
+  of the file you are editing.
+- URL/path strings in `source` fields use double quotes consistently.
 
 ### Imports and Module Loading
 
-- Plugin files are loaded via `require()` for **side effects** -- they do NOT return a module table
-- `init.lua` dynamically scans `lua/plugins/*.lua` and requires each file
+- Plugin files are loaded for **side effects** -- they do NOT return a module table
+- `init.lua` scans `lua/configs/*.lua` and `lua/plugins/*.lua` via `load_directory()`
 - Use `MiniDeps.add()` to declare plugin dependencies
-- Use `MiniDeps.now()` for UI-critical plugins that must load immediately
-- Use `MiniDeps.later()` for plugins that can be deferred
-- Destructure MiniDeps at the top of a file when using multiple functions:
+- Use `MiniDeps.now()` for UI-critical plugins (theme, treesitter, oil, mini core modules)
+- Use `MiniDeps.later()` for deferrable plugins (LSP, git, completion, pickers)
+- Destructure when using multiple MiniDeps functions:
   ```lua
   local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
   ```
-- For simple plugin files that only use `add`, call `MiniDeps.add()` directly without destructuring
+- For simple files, call `MiniDeps.add()` / `MiniDeps.later()` directly on the global
 
 ### Naming Conventions
 
-- **File names:** Lowercase, short descriptive names (`lsp.lua`, `git.lua`, `theme.lua`)
+- **Files:** Lowercase, short names (`lsp.lua`, `git.lua`). Underscores for sub-modules (`mini_pick.lua`)
 - **Variables:** `snake_case` for locals and parameters
-- **Neovim globals:** Access via `vim.` namespace (`vim.opt`, `vim.g`, `vim.keymap`, `vim.api`, etc.)
-- **Mini globals:** Mini plugins expose globals like `MiniDeps`, `MiniIcons`, `MiniFiles`, `MiniPick`
+- **Neovim API:** Always access via `vim.*` namespace (`vim.opt`, `vim.g`, `vim.keymap`, `vim.api`)
+- **Mini globals:** Used directly after setup -- `MiniDeps`, `MiniFiles`, `MiniPick`, `MiniExtra`, `MiniMap`
 
 ### Keymaps
 
-- Use `vim.keymap.set()` with the `desc` field for all keymaps (enables discoverability via mini.clue)
-- Leader key is `<Space>`
-- Group related keymaps with prefixes:
-  - `<Leader>f` -- find/search operations
-  - `<Leader>g` -- git operations
-  - `<Leader>e` -- file explorer (netrw)
-  - `<Leader>m` -- file explorer (mini.files)
+- Use `vim.keymap.set()` with `desc` field on every keymap (enables mini.clue discovery)
+- Leader key is `<Space>` (set in `lua/configs/options.lua`)
+- Keymap group prefixes:
+  - `<Leader>p` -- pick/search (mini.pick)
+  - `<Leader>f` -- file explorer (mini.files)
+  - `<Leader>m` -- minimap (mini.map)
+  - `<Leader>g` -- git operations (gitsigns, neogit)
+  - `<Leader>gt` -- git toggle options
+  - `<Leader>y` -- YAML schema operations
+  - `<Leader>o` -- oil.nvim file manager
+  - `gr` prefix -- LSP operations (grn=rename, gra=action, grf=format, grd=diagnostics)
 
 ### Plugin File Pattern
 
-Each file in `lua/plugins/` follows this pattern:
+Each file in `lua/plugins/` follows one of these patterns:
 
 ```lua
--- Optional: destructure MiniDeps helpers
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+-- Pattern 1: Deferred plugin with config
+MiniDeps.later(function()
+  MiniDeps.add({ source = 'author/plugin-name' })
+  require('plugin-name').setup({ ... })
+  vim.keymap.set('n', '<Leader>x', some_fn, { desc = 'Description' })
+end)
 
--- Declare plugin dependency
-MiniDeps.add({
-  source = 'author/plugin-name'
-})
+-- Pattern 2: Immediate plugin (UI-critical)
+MiniDeps.now(function()
+  MiniDeps.add({ source = 'author/plugin-name' })
+  require('plugin-name').setup({ ... })
+end)
 
--- For deferred plugins, wrap setup in later()
+-- Pattern 3: Destructured with separate add + later
+local add, later = MiniDeps.add, MiniDeps.later
+add({ source = 'author/plugin', depends = { 'dep/one' }, checkout = 'v1.0' })
 later(function()
-  require('plugin-name').setup({
-    -- configuration
-  })
-  -- Keymaps related to this plugin
-  vim.keymap.set('n', '<Leader>x', some_function, { desc = 'Description' })
+  require('plugin').setup({ ... })
 end)
 ```
 
-For simple plugins with no configuration, the file can be minimal:
-
-```lua
-MiniDeps.add({ source = 'author/plugin-name' })
-```
-
-### Comments
-
-- Use `--` for single-line comments
-- Add section headers as comments to organize groups (e.g., `-- Tab/Indent`, `-- UI`, `-- Search`)
-- Keep comments concise and descriptive
-
 ### Error Handling
 
-- No explicit error handling patterns are used -- Neovim's built-in error reporting surfaces issues
-- Plugin bootstrapping (in `init.lua`) uses `vim.fn.system()` without error checking; failures
-  are visible at startup via Neovim messages
-
-### Options Configuration
-
-- Access Neovim options via `vim.opt` aliased to a local `opt`:
-  ```lua
-  local opt = vim.opt
-  opt.expandtab = true
-  ```
-- Set global variables via `vim.g` (e.g., `vim.g.mapleader = ' '`)
-- Group related options with section comments
+- No explicit error handling -- Neovim surfaces errors at startup
+- One exception: `tree-sitter.lua` uses `pcall(vim.treesitter.language.inspect, lang)`
+  to gracefully skip missing parsers
 
 ### LSP Configuration
 
-- LSP servers are declared in `lua/plugins/lsp.lua` via `vim.lsp.enable()`
-- Per-server configuration goes in `after/lsp/<server_name>.lua` (Neovim 0.11+ convention)
-- Server config files return a table with `settings`, `cmd`, etc.
-- Mason handles installation of LSP servers and tools
+- All LSP servers enabled in `lua/plugins/lsp.lua` via `vim.lsp.enable({...})`
+- Per-server config in `after/lsp/<server_name>.lua` returning `vim.lsp.Config` table
+- Mason auto-installs all servers on startup (3s delay)
+
+### Options Configuration
+
+- `vim.opt` aliased to local `opt` in `lua/configs/options.lua`
+- `vim.g` for global variables (leader key, netrw settings)
+- Grouped with section comments (`-- Tab/Indent`, `-- UI`, `-- Search`, etc.)
 
 ## Configuration Files
 
 | File | Purpose |
 |------|---------|
-| `.stylelua.toml` | StyLua formatter config (non-standard name, requires `--config-path`) |
-| `.luarc.json` | Lua Language Server config (runtime, diagnostics, workspace) |
+| `.stylelua.toml` | StyLua config (non-standard name -- always use `--config-path`) |
+| `.luarc.json` | lua_ls config (LuaJIT runtime, vim global, workspace libraries) |
 
 ## Known Issues
 
-- `.stylelua.toml` uses a non-standard filename. StyLua will not auto-discover it.
-  Standard names are `stylua.toml` or `.stylua.toml`. Always pass `--config-path .stylelua.toml`
-  when running StyLua.
-- `MiniDeps` is used as a global variable but is not listed in `.luarc.json` diagnostics globals
-  (only `vim` is listed). This may cause lua_ls warnings. Consider adding `"MiniDeps"` to the
-  globals list.
+- `.stylelua.toml` is a non-standard filename. StyLua requires explicit `--config-path`.
+- `MiniDeps` and other Mini globals are not in `.luarc.json` globals list; lua_ls may warn.
+- `after/lsp/lua_ls.lua` sets runtime to "Lua 5.4" while `.luarc.json` sets "LuaJIT" --
+  these serve different purposes (LSP server config vs editor tooling) but could confuse.
