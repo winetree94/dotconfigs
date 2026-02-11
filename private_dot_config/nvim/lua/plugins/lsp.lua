@@ -4,6 +4,7 @@ MiniDeps.later(function()
 	})
 
 	vim.lsp.enable({
+    "gh_actions_ls",
 		"lua_ls",
 		"stylua",
 		"ts_ls",
@@ -22,5 +23,6 @@ MiniDeps.later(function()
 		"dockerls",
 		"docker_language_server",
 		"docker_compose_language_service",
+    "helm_ls"
 	})
 end)

@@ -34,6 +34,8 @@ MiniDeps.later(function()
 			"dockerfile-language-server",
 			"docker-language-server",
 			"docker-compose-language-service",
+      "gh-actions-language-server",
+      "helm-ls"
 		},
 
 		-- if set to true this will check each tool for updates. If updates
