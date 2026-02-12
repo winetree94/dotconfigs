@@ -1,6 +1,6 @@
 MiniDeps.now(function()
 	MiniDeps.add({
-		source = "mini-nvim/mini.hipatterns",
+		source = "nvim-mini/mini.hipatterns",
 		checkout = "stable",
 	})
 
