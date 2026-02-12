@@ -37,6 +37,9 @@ now(function()
 	require("mini.jump2d").setup()
 
   --------------- appearance
+	add({ source = "nvim-mini/mini.cursorword", checkout = "stable" })
+	require("mini.cursorword").setup()
+
 	add({ source = "nvim-mini/mini.icons", checkout = "stable" })
 	require("mini.icons").setup()
 
