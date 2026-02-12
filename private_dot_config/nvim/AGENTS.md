@@ -3,9 +3,9 @@
 ## Project Overview
 
 Personal Neovim configuration in Lua targeting Neovim 0.11+. Uses **mini.deps**
-(`echasnovski/mini.nvim`) as plugin manager, with the mini.nvim ecosystem for editing,
+(`nvim-mini/mini.nvim`) as plugin manager, with the mini.nvim ecosystem for editing,
 navigation, and UI. Completion is handled by **blink.cmp**, git by **gitsigns.nvim** +
-**neogit**, and file browsing by **oil.nvim** + **mini.files**.
+**neogit**, file browsing by **neo-tree.nvim** + **mini.files**.
 
 ## Directory Structure
 
@@ -24,11 +24,11 @@ lua/
     mini.lua                # Bulk mini.nvim modules (ai, pairs, move, icons, etc.)
     mini_clue.lua           # mini.clue (keybinding hints)
     mini_files.lua          # mini.files (file explorer)
+    mini_hipatterns.lua     # mini.hipatterns (highlight TODO/FIXME/hex colors)
     mini_map.lua            # mini.map (code minimap)
     mini_pick.lua           # mini.pick + mini.extra (fuzzy finder)
+    neo-tree.lua            # neo-tree.nvim (sidebar file tree)
     neogit.lua              # neogit (git porcelain UI)
-    netrw.lua               # Built-in netrw config (mostly disabled)
-    oil.lua                 # oil.nvim (file manager as buffer)
     theme.lua               # nightfox.nvim (carbonfox colorscheme)
     tree-sitter.lua         # nvim-treesitter (syntax highlighting)
 after/
@@ -60,13 +60,6 @@ luacheck lua/plugins/blink.lua
 **IMPORTANT:** StyLua config is `.stylelua.toml` (non-standard name). You MUST pass
 `--config-path .stylelua.toml` every time. StyLua will NOT auto-discover it.
 
-Mason-managed tools (auto-installed on startup): `lua-language-server`, `stylua`,
-`luacheck`, `yaml-language-server`, `vim-language-server`, `json-lsp`, `html-lsp`,
-`typescript-language-server`, `bash-language-server`, `eslint-lsp`, `biome`, `css-lsp`,
-`emmet-language-server`, `tailwindcss-language-server`, `astro-language-server`,
-`ansible-language-server`, `dockerfile-language-server`, `docker-language-server`,
-`docker-compose-language-service`, `gh-actions-language-server`, `helm-ls`.
-
 ## Code Style Guidelines
 
 ### Language and Runtime
@@ -76,16 +69,15 @@ Mason-managed tools (auto-installed on startup): `lua-language-server`, `stylua`
 
 ### Formatting
 
-- **Indentation:** 2 spaces (tabs for continuation in some files -- StyLua decides)
-- **Formatter:** StyLua (config: `.stylelua.toml`, indent_width=2, indent_type=Spaces)
+- **Indentation:** 2 spaces (indent_width=2, indent_type=Spaces)
+- **Formatter:** StyLua (config: `.stylelua.toml`)
 - **Line width:** 120 (StyLua default)
-- Always run `stylua --config-path .stylelua.toml` after editing Lua files
+- Always run `stylua --config-path .stylelua.toml <file>` after editing Lua files
 
 ### Strings and Quotes
 
-- **Mixed convention observed in codebase:** some files use single quotes (`'`), others
-  use double quotes (`"`). StyLua does not enforce quote style. Match the existing style
-  of the file you are editing.
+- **Mixed convention:** some files use single quotes (`'`), others use double quotes (`"`).
+  StyLua does not enforce quote style. **Match the existing style of the file you edit.**
 - URL/path strings in `source` fields use double quotes consistently.
 
 ### Imports and Module Loading
@@ -93,7 +85,7 @@ Mason-managed tools (auto-installed on startup): `lua-language-server`, `stylua`
 - Plugin files are loaded for **side effects** -- they do NOT return a module table
 - `init.lua` scans `lua/configs/*.lua` and `lua/plugins/*.lua` via `load_directory()`
 - Use `MiniDeps.add()` to declare plugin dependencies
-- Use `MiniDeps.now()` for UI-critical plugins (theme, treesitter, oil, mini core modules)
+- Use `MiniDeps.now()` for UI-critical plugins (theme, treesitter, neo-tree, mini core)
 - Use `MiniDeps.later()` for deferrable plugins (LSP, git, completion, pickers)
 - Destructure when using multiple MiniDeps functions:
   ```lua
@@ -103,10 +95,12 @@ Mason-managed tools (auto-installed on startup): `lua-language-server`, `stylua`
 
 ### Naming Conventions
 
-- **Files:** Lowercase, short names (`lsp.lua`, `git.lua`). Underscores for sub-modules (`mini_pick.lua`)
+- **Files:** Lowercase, short names (`lsp.lua`, `theme.lua`). Underscores for
+  sub-modules (`mini_pick.lua`). Hyphens for plugin-named files (`neo-tree.lua`).
 - **Variables:** `snake_case` for locals and parameters
-- **Neovim API:** Always access via `vim.*` namespace (`vim.opt`, `vim.g`, `vim.keymap`, `vim.api`)
-- **Mini globals:** Used directly after setup -- `MiniDeps`, `MiniFiles`, `MiniPick`, `MiniExtra`, `MiniMap`
+- **Neovim API:** Always use `vim.*` namespace (`vim.opt`, `vim.g`, `vim.keymap`, `vim.api`)
+- **Mini globals:** Used directly after setup -- `MiniDeps`, `MiniFiles`, `MiniPick`,
+  `MiniExtra`, `MiniMap`
 
 ### Keymaps
 
@@ -116,13 +110,13 @@ Mason-managed tools (auto-installed on startup): `lua-language-server`, `stylua`
   - `<Leader>p` -- pick/search (mini.pick)
   - `<Leader>f` -- file explorer (mini.files)
   - `<Leader>m` -- minimap (mini.map)
+  - `<Leader>n` -- neo-tree (sidebar tree)
   - `<Leader>g` -- git operations (gitsigns, neogit)
   - `<Leader>gt` -- git toggle options
   - `<Leader>y` -- YAML schema operations
-  - `<Leader>o` -- oil.nvim file manager
   - `gr` prefix -- LSP operations (grn=rename, gra=action, grf=format, grd=diagnostics)
 
-### Plugin File Pattern
+### Plugin File Patterns
 
 Each file in `lua/plugins/` follows one of these patterns:
 
@@ -140,10 +134,10 @@ MiniDeps.now(function()
   require('plugin-name').setup({ ... })
 end)
 
--- Pattern 3: Destructured with separate add + later
-local add, later = MiniDeps.add, MiniDeps.later
+-- Pattern 3: Destructured with separate add + now/later
+local add, now = MiniDeps.add, MiniDeps.now
 add({ source = 'author/plugin', depends = { 'dep/one' }, checkout = 'v1.0' })
-later(function()
+now(function()
   require('plugin').setup({ ... })
 end)
 ```
@@ -159,6 +153,13 @@ end)
 - All LSP servers enabled in `lua/plugins/lsp.lua` via `vim.lsp.enable({...})`
 - Per-server config in `after/lsp/<server_name>.lua` returning `vim.lsp.Config` table
 - Mason auto-installs all servers on startup (3s delay)
+- Mason-managed tools: `lua-language-server`, `stylua`, `luacheck`,
+  `yaml-language-server`, `vim-language-server`, `json-lsp`, `html-lsp`,
+  `typescript-language-server`, `bash-language-server`, `eslint-lsp`, `biome`,
+  `css-lsp`, `emmet-language-server`, `tailwindcss-language-server`,
+  `astro-language-server`, `ansible-language-server`, `dockerfile-language-server`,
+  `docker-language-server`, `docker-compose-language-service`,
+  `gh-actions-language-server`, `helm-ls`
 
 ### Options Configuration
 
