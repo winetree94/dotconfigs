@@ -1,6 +1,6 @@
 ---
 description: Fast general knowledge Q&A agent with concise responses only
-mode: subagent
+mode: primary
 temperature: 0.2
 tools:
   bash: false
