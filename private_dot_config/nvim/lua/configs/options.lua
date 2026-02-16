@@ -23,7 +23,7 @@ opt.termguicolors = true
 opt.showmode = false
 
 -- Editing
-opt.wrap = false
+opt.wrap = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.splitright = true
