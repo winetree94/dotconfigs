@@ -15,6 +15,7 @@ MiniDeps.now(function()
 				enabled = true,
 				leave_dirs_open = true,
 			},
+			use_libuv_file_watcher = true,
 		},
 	})
 	vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
