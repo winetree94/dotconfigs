@@ -8,7 +8,7 @@ MiniDeps.later(function()
 		current_line_blame = true,
 		numhl = true,
 		linehl = true,
-		word_diff = true,
+		word_diff = false,
 		on_attach = function(bufnr)
 			local gitsigns = require("gitsigns")
 
