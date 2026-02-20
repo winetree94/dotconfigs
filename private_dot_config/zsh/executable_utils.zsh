@@ -22,52 +22,9 @@ maybe_eval() {
 maybe_alias() {
   local cmd="$1"
   local alias_name="$2"
+  local alias_value="${3:-$cmd}"
   if command -v "$cmd" >/dev/null 2>&1; then
-    alias "$alias_name"="$cmd"
+    alias "$alias_name"="$alias_value"
   fi
 }
 
-sync_configs() {
-  # zsh
-  echo "sync zsh configs"
-	rsync -av --delete \
-    "$HOME/.config/zsh/" "$HOME/.dotconfigs/roles/zsh/files/zsh/"
-	(
-		cd "$HOME/.dotconfigs"
-		ansible-vault encrypt "$HOME/.dotconfigs/roles/zsh/files/zsh/secrets.zsh"
-	)
-
-  # ssh
-  echo "sync ssh configs"
-  rsync -av --delete \
-    --include 'config' \
-    --include 'winetree94_id_rsa' \
-    --include 'winetree94_id_rsa.pub' \
-    --exclude '*' \
-    "$HOME/.ssh/" "$HOME/.dotconfigs/roles/ssh/files/.ssh/"
-  (
-		cd "$HOME/.dotconfigs"
-		ansible-vault encrypt "$HOME/.dotconfigs/roles/ssh/files/.ssh/winetree94_id_rsa"
-		ansible-vault encrypt "$HOME/.dotconfigs/roles/ssh/files/.ssh/winetree94_id_rsa.pub"
-  )
-
-  # gitconfig
-  echo "sync git configs"
-  rsync -av \
-    "$HOME/.gitconfig" "$HOME/.dotconfigs/roles/git/files/"
-
-  # tmux
-  echo "sync tmux configs"
-	rsync -av --delete \
-    "$HOME/.config/tmux/" "$HOME/.dotconfigs/roles/tmux/files/tmux/"
-
-  # nvim
-  echo "sync neovim configs"
-	rsync -av --delete \
-    "$HOME/.config/nvim/" "$HOME/.dotconfigs/roles/nvim/files/nvim/"
-
-  # opencode
-  echo "sync opencode configs"
-	rsync -av --delete \
-    "$HOME/.config/opencode/" "$HOME/.dotconfigs/roles/opencode/files/opencode/"
-}
