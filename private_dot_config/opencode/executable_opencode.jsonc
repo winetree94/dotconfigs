@@ -86,6 +86,19 @@
           "name": "Gemma 3 4b (local)"
         }
       }
+    },
+    "llama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Llama (local)",
+      "options": {
+        "apiKey": "{env:LOCAL_LLAMA_API_KEY}",
+        "baseURL": "https://llm.intranet.winetree94.com/v1"
+      },
+      "models": {
+        "qwen2.5-coder-7b-instruct-q4_0.gguf": {
+          "name": "Qwen Coder 2.5 7b Instruct"
+        }
+      }
     }
   },
   "mcp": {
