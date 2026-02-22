@@ -12,10 +12,14 @@
   rebase = true
 
 {{ if eq .chezmoi.os "darwin" }}
-
+{{ else if eq .chezmoi.os "linux" }}
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+[credential]
+  helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{ else }}
 [credential]
   helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+{{ end }}
 {{ end }}
 
 [push]
