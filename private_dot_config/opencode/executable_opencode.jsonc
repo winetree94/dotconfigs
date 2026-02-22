@@ -4,7 +4,7 @@
   // "instructions": [
   //   "~/.config/opencode/general.md"
   // ],
-  "model": "openai/gpt-5.3-codex",
+  "model": "openai/gpt-5.3-codex-max",
   "small_model": "openai/gpt-5.3-codex",
   "permission": {
     "bash": "allow",
