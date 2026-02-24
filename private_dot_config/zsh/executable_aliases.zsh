@@ -7,3 +7,5 @@ maybe_alias "talosctl" "t"
 maybe_alias "talhelper" "th"
 maybe_alias "opencode" "oc"
 maybe_alias "claude" "claude" "claude --dangerously-skip-permissions"
+maybe_alias "codex" "codex" "codex --dangerously-bypass-approvals-and-sandbox"
+
