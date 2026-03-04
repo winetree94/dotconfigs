@@ -20,6 +20,7 @@ MiniDeps.now(function()
 		"tsx",
 		"markdown",
 		"markdown_inline",
+    "python"
 	})
 
 	vim.api.nvim_create_autocmd("FileType", {
