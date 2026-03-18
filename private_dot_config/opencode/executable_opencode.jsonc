@@ -77,23 +77,23 @@
     //     "BRAVE_API_KEY": "YOUR_API_KEY_HERE"
     //   }
     // },
-    "context7": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@upstash/context7-mcp"
-      ],
-      "enabled": true
-    },
-    "playwright": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@playwright/mcp@latest"
-      ],
-      "enabled": true
-    }
+    // "context7": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "-y",
+    //     "@upstash/context7-mcp"
+    //   ],
+    //   "enabled": true
+    // },
+    // "playwright": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "@playwright/mcp@latest"
+    //   ],
+    //   "enabled": true
+    // }
   },
   "plugin": [
     "opencode-anthropic-auth@latest"
