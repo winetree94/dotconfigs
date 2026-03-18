@@ -16,3 +16,5 @@ export OPENCODE_DISABLE_CLAUDE_CODE=true
 
 export FZF_BASE=${HOMEBREW_PREFIX}/opt/fzf
 # export FZF_BASE=$(brew --prefix)/opt/fzf
+
+bindkey -v
