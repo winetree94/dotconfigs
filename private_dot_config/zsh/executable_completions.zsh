@@ -1,4 +1,4 @@
-maybe_eval devtools completion zsh
+maybe_eval devtools autocomplete script zsh
 maybe_eval docker completion zsh
 maybe_eval kubectl completion zsh
 maybe_eval talosctl completion zsh
