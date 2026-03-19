@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.60.0",
-  "defaultProvider": "google",
-  "defaultModel": "gemini-3-flash-preview",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-6",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openai-codex/gpt-5.4",
@@ -13,6 +13,8 @@
     "github-copilot/gpt-5.3-codex",
     "github-copilot/gpt-5.4",
     "github-copilot/claude-opus-4.6",
-    "github-copilot/claude-sonnet-4.6"
+    "github-copilot/claude-sonnet-4.6",
+    "anthropic/claude-opus-4-6",
+    "anthropic/claude-sonnet-4-6"
   ]
 }
